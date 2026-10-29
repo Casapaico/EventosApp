@@ -14,6 +14,7 @@
             <th>Nombres</th>
             <th>DNI</th>
             <th>Correo</th>
+            <th>Teléfono</th>
         </tr>
     </thead>
     <tbody>
@@ -23,6 +24,7 @@
                 <td>@a.Nombres</td>
                 <td>@a.Dni</td>
                 <td>@a.Correo</td>
+                <td>@(string.IsNullOrEmpty(a.Telefono) ? "-" : a.Telefono)</td>
             </tr>
         }
     </tbody>

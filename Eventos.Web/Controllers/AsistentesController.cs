@@ -25,7 +25,7 @@ public class AsistentesController : Controller
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create([Bind("Nombres,Dni,Correo")] Asistente asistente)
+    public async Task<IActionResult> Create([Bind("Nombres,Dni,Correo,Telefono")] Asistente asistente)
     {
         asistente.Correo = asistente.Correo?.Trim().ToLower() ?? string.Empty;
 

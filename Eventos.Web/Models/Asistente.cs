@@ -24,6 +24,12 @@ public class Asistente
     [EmailAddress(ErrorMessage = "El correo no tiene un formato válido.")]
     public string Correo { get; set; } = string.Empty;
 
+    // Agregada en la migración AgregarTelefonoAsistente (opcional)
+    [StringLength(9, ErrorMessage = "El teléfono no puede superar los 9 caracteres.")]
+    [RegularExpression(@"^\d{1,9}$", ErrorMessage = "El teléfono solo debe tener números.")]
+    [Display(Name = "Teléfono")]
+    public string? Telefono { get; set; }
+
     public bool Activo { get; set; } = true;
 
     public List<Inscripcion> Inscripciones { get; set; } = new();
