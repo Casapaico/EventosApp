@@ -26,9 +26,9 @@
             <tr>
                 <td>@i.Id</td>
                 <td>@i.Evento?.Titulo</td>
-                <td>@i.Evento?.Fecha.ToString("dd/MM/yyyy HH:mm")</td>
+                <td class="text-nowrap">@i.Evento?.Fecha.ToString("dd/MM/yyyy HH:mm")</td>
                 <td>@i.Asistente?.Nombres</td>
-                <td>@i.FechaInscripcion.ToString("dd/MM/yyyy HH:mm")</td>
+                <td class="text-nowrap">@i.FechaInscripcion.ToString("dd/MM/yyyy HH:mm")</td>
                 <td>
                     <span class="badge @(i.Estado == "Confirmada" ? "text-bg-success" : "text-bg-secondary")">@i.Estado</span>
                 </td>

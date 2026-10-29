@@ -1,0 +1,42 @@
+COMANDOS USADOS (VS Code, terminal integrada, dentro de Eventos.Web)
+────────────────────────────────────────────────────────────────────────────
+# Proyecto y paquetes
+dotnet new mvc -n Eventos.Web
+dotnet add package Microsoft.EntityFrameworkCore.SqlServer
+dotnet add package Microsoft.EntityFrameworkCore.Design
+dotnet add package Microsoft.EntityFrameworkCore.Tools
+
+# Herramienta de EF (una sola vez)
+dotnet tool install --global dotnet-ef
+
+# Migración 1
+dotnet ef migrations add InitialCreate
+dotnet ef database update
+
+# Migración 2 (antes del update: defaultValue "" -> "Presencial" en el archivo generado)
+dotnet ef migrations add AgregarModalidadEvento
+dotnet ef database update
+
+# Migración 3
+dotnet ef migrations add AgregarTelefonoAsistente
+dotnet ef database update
+
+# Verificación
+dotnet ef migrations list
+sqlcmd -C -S localhost -U sa -P "$SA_PASSWORD" -d EventosDB -W -Q "SELECT MigrationId, ProductVersion FROM __EFMigrationsHistory ORDER BY MigrationId;"
+
+# Ejecutar
+dotnet run --launch-profile http        # http://localhost:5090
+
+
+NOTAS
+────────────────────────────────────────────────────────────────────────────
+- La contraseña de sa no está en appsettings.json: va en user-secrets
+    dotnet user-secrets set "ConnectionStrings:Eventos" "Server=localhost,1433;Database=EventosDB;User Id=sa;Password=...;TrustServerCertificate=True"
+- Para volver a una BD limpia (mismas 3 migraciones, sin tocar archivos):
+    dotnet ef database drop --force
+    dotnet ef database update
+  Al iniciar la app se vuelven a cargar los datos iniciales.
+- Linux con .NET instalado por snap: si "dotnet ef" no se encuentra, agregar a ~/.bashrc
+    export DOTNET_ROOT=/var/snap/dotnet/common/dotnet
+    export PATH="$PATH:$HOME/.dotnet/tools"
