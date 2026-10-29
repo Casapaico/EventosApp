@@ -26,6 +26,7 @@
             <th>Fecha</th>
             <th>Título</th>
             <th>Categoría</th>
+            <th>Modalidad</th>
             <th>Lugar</th>
             <th class="text-end">Precio</th>
             <th class="text-center">Aforo</th>
@@ -41,6 +42,9 @@
                 <td>@e.Fecha.ToString("dd/MM/yyyy HH:mm")</td>
                 <td>@e.Titulo</td>
                 <td>@e.Categoria</td>
+                <td>
+                    <span class="badge @(e.Modalidad == "Virtual" ? "text-bg-info" : "text-bg-light border")">@e.Modalidad</span>
+                </td>
                 <td>@e.Lugar</td>
                 <td class="text-end">@(e.Precio == 0 ? "Gratis" : e.Precio.ToString("C"))</td>
                 <td class="text-center">@e.Aforo</td>

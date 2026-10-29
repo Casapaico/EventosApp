@@ -73,7 +73,7 @@ static async Task CargarDatosInicialesAsync(EventosContext context)
             new Evento { Titulo = "Taller de ASP.NET Core MVC", Fecha = new DateTime(2026, 11, 14, 9, 0, 0), Lugar = "Tecsup - Auditorio", Aforo = 40, Precio = 0m, CategoriaId = categorias["Tecnología"] },
             new Evento { Titulo = "Concierto de rock peruano", Fecha = new DateTime(2026, 12, 5, 20, 0, 0), Lugar = "Parque de la Exposición", Aforo = 1500, Precio = 85.50m, CategoriaId = categorias["Música"] },
             new Evento { Titulo = "Feria de emprendedores de Gamarra", Fecha = new DateTime(2026, 10, 18, 10, 0, 0), Lugar = "Gamarra - La Victoria", Aforo = 300, Precio = 10m, CategoriaId = categorias["Emprendimiento"] },
-            new Evento { Titulo = "Charla: IA para pymes", Fecha = new DateTime(2026, 11, 20, 18, 30, 0), Lugar = "Zoom", Aforo = 2, Precio = 25m, CategoriaId = categorias["Tecnología"] });
+            new Evento { Titulo = "Charla: IA para pymes", Fecha = new DateTime(2026, 11, 20, 18, 30, 0), Lugar = "Zoom", Modalidad = "Virtual", Aforo = 2, Precio = 25m, CategoriaId = categorias["Tecnología"] });
         await context.SaveChangesAsync();
     }
 

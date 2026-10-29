@@ -7,6 +7,8 @@ namespace Eventos.Web.Controllers;
 
 public class EventosController : Controller
 {
+    private static readonly string[] Modalidades = ["Presencial", "Virtual"];
+
     private readonly EventoRepositorio _eventos;
 
     public EventosController(EventoRepositorio eventos)
@@ -42,7 +44,7 @@ public class EventosController : Controller
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create([Bind("Titulo,Fecha,Lugar,Aforo,Precio,CategoriaId")] Evento evento)
+    public async Task<IActionResult> Create([Bind("Titulo,Fecha,Lugar,Modalidad,Aforo,Precio,CategoriaId")] Evento evento)
     {
         await ValidarCategoriaAsync(evento);
 
@@ -69,7 +71,7 @@ public class EventosController : Controller
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Edit(int id, [Bind("Id,Titulo,Fecha,Lugar,Aforo,Precio,CategoriaId")] Evento evento)
+    public async Task<IActionResult> Edit(int id, [Bind("Id,Titulo,Fecha,Lugar,Modalidad,Aforo,Precio,CategoriaId")] Evento evento)
     {
         if (id != evento.Id)
             return NotFound();
@@ -129,5 +131,6 @@ public class EventosController : Controller
     {
         var categorias = await _eventos.ObtenerCategoriasActivasAsync();
         ViewBag.Categorias = new SelectList(categorias, nameof(Categoria.Id), nameof(Categoria.Nombre), categoriaId);
+        ViewBag.Modalidades = new SelectList(Modalidades);
     }
 }

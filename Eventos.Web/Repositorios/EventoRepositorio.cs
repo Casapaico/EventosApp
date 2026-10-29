@@ -32,6 +32,7 @@ public class EventoRepositorio
                 Titulo = e.Titulo,
                 Fecha = e.Fecha,
                 Lugar = e.Lugar,
+                Modalidad = e.Modalidad,
                 Categoria = e.Categoria!.Nombre,
                 Aforo = e.Aforo,
                 Precio = e.Precio,
@@ -97,6 +98,7 @@ public class EventoRepositorio
         evento.Titulo = datos.Titulo;
         evento.Fecha = datos.Fecha;
         evento.Lugar = datos.Lugar;
+        evento.Modalidad = datos.Modalidad;
         evento.Aforo = datos.Aforo;
         evento.Precio = datos.Precio;
         evento.CategoriaId = datos.CategoriaId;

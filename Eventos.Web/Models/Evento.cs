@@ -30,6 +30,12 @@ public class Evento
     [Display(Name = "Categoría")]
     public int CategoriaId { get; set; }
 
+    // Agregada en la migración AgregarModalidadEvento
+    [Required(ErrorMessage = "La modalidad es obligatoria.")]
+    [StringLength(20)]
+    [AllowedValues("Presencial", "Virtual", ErrorMessage = "La modalidad debe ser Presencial o Virtual.")]
+    public string Modalidad { get; set; } = "Presencial";
+
     public bool Activo { get; set; } = true;
 
     public Categoria? Categoria { get; set; }
