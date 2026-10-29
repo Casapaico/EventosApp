@@ -1,0 +1,27 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "build",
+      "command": "dotnet",
+      "type": "process",
+      "args": ["build", "${workspaceFolder}/Eventos.Web/Eventos.Web.csproj"],
+      "problemMatcher": "$msCompile",
+      "group": { "kind": "build", "isDefault": true }
+    },
+    {
+      "label": "EF: aplicar migraciones (database update)",
+      "type": "shell",
+      "command": "dotnet ef database update",
+      "options": { "cwd": "${workspaceFolder}/Eventos.Web" },
+      "problemMatcher": []
+    },
+    {
+      "label": "EF: listar migraciones",
+      "type": "shell",
+      "command": "dotnet ef migrations list",
+      "options": { "cwd": "${workspaceFolder}/Eventos.Web" },
+      "problemMatcher": []
+    }
+  ]
+}

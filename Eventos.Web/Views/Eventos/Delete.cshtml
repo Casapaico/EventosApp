@@ -1,0 +1,23 @@
+@model Evento
+@{
+    ViewData["Title"] = "Eliminar evento";
+    var confirmados = (int)ViewBag.Confirmados;
+}
+
+<h1>Eliminar evento</h1>
+
+<p>¿Desea eliminar el evento <strong>@Model.Titulo</strong> (@Model.Categoria?.Nombre, @Model.Fecha.ToString("dd/MM/yyyy HH:mm"))?</p>
+
+@if (confirmados > 0)
+{
+    <div class="alert alert-warning">
+        El evento tiene <strong>@confirmados</strong> inscripción(es) confirmada(s). Se conservarán en el historial.
+    </div>
+}
+
+<p class="text-muted">La eliminación es lógica: el evento deja de mostrarse, pero el registro queda en la base con Activo = 0.</p>
+
+<form asp-action="Delete" asp-route-id="@Model.Id">
+    <button class="btn btn-danger">Eliminar</button>
+    <a class="btn btn-outline-secondary" asp-action="Index">Cancelar</a>
+</form>

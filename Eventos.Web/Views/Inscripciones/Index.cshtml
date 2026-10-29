@@ -1,0 +1,52 @@
+@model IEnumerable<Inscripcion>
+@{
+    ViewData["Title"] = "Inscripciones";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h1>Inscripciones</h1>
+    <a class="btn btn-primary" asp-action="Create">Nueva inscripción</a>
+</div>
+
+<table class="table table-striped align-middle">
+    <thead>
+        <tr>
+            <th>N.°</th>
+            <th>Evento</th>
+            <th>Fecha del evento</th>
+            <th>Asistente</th>
+            <th>Fecha de inscripción</th>
+            <th>Estado</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var i in Model)
+        {
+            <tr>
+                <td>@i.Id</td>
+                <td>@i.Evento?.Titulo</td>
+                <td>@i.Evento?.Fecha.ToString("dd/MM/yyyy HH:mm")</td>
+                <td>@i.Asistente?.Nombres</td>
+                <td>@i.FechaInscripcion.ToString("dd/MM/yyyy HH:mm")</td>
+                <td>
+                    <span class="badge @(i.Estado == "Confirmada" ? "text-bg-success" : "text-bg-secondary")">@i.Estado</span>
+                </td>
+                <td class="text-end">
+                    @if (i.Estado == "Confirmada")
+                    {
+                        <form asp-action="Cancelar" asp-route-id="@i.Id" class="d-inline"
+                              onsubmit="return confirm('¿Cancelar la inscripción N.° @i.Id?');">
+                            <button class="btn btn-sm btn-outline-danger">Cancelar</button>
+                        </form>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@if (!Model.Any())
+{
+    <p class="text-muted">Todavía no hay inscripciones.</p>
+}

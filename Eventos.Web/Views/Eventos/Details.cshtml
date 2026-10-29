@@ -1,0 +1,39 @@
+@model Evento
+@{
+    ViewData["Title"] = Model.Titulo;
+    var inscritos = (List<Asistente>)ViewBag.Inscritos;
+}
+
+<h1>@Model.Titulo</h1>
+
+<dl class="row">
+    <dt class="col-sm-3">Categoría</dt>
+    <dd class="col-sm-9">@Model.Categoria?.Nombre</dd>
+    <dt class="col-sm-3">Fecha</dt>
+    <dd class="col-sm-9">@Model.Fecha.ToString("dddd dd/MM/yyyy, HH:mm")</dd>
+    <dt class="col-sm-3">Lugar</dt>
+    <dd class="col-sm-9">@Model.Lugar</dd>
+    <dt class="col-sm-3">Precio</dt>
+    <dd class="col-sm-9">@(Model.Precio == 0 ? "Gratis" : Model.Precio.ToString("C"))</dd>
+    <dt class="col-sm-3">Aforo</dt>
+    <dd class="col-sm-9">@Model.Aforo personas (@inscritos.Count inscritos, @(Model.Aforo - inscritos.Count) cupos libres)</dd>
+</dl>
+
+<h4>Inscritos confirmados</h4>
+@if (inscritos.Any())
+{
+    <ul class="list-group mb-3 col-md-6">
+        @foreach (var a in inscritos)
+        {
+            <li class="list-group-item">@a.Nombres <span class="text-muted">- DNI @a.Dni</span></li>
+        }
+    </ul>
+}
+else
+{
+    <p class="text-muted">Todavía no hay inscritos.</p>
+}
+
+<a class="btn btn-success" asp-controller="Inscripciones" asp-action="Create" asp-route-eventoId="@Model.Id">Inscribir asistente</a>
+<a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model.Id">Editar</a>
+<a class="btn btn-outline-secondary" asp-action="Index">Volver</a>

@@ -1,0 +1,39 @@
+@model Evento
+
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<div class="mb-3">
+    <label asp-for="Titulo" class="form-label"></label>
+    <input asp-for="Titulo" class="form-control" />
+    <span asp-validation-for="Titulo" class="text-danger"></span>
+</div>
+<div class="mb-3">
+    <label asp-for="CategoriaId" class="form-label"></label>
+    <select asp-for="CategoriaId" asp-items="ViewBag.Categorias" class="form-select">
+        <option value="0">-- Seleccione una categoría --</option>
+    </select>
+    <span asp-validation-for="CategoriaId" class="text-danger"></span>
+</div>
+<div class="row">
+    <div class="col-md-6 mb-3">
+        <label asp-for="Fecha" class="form-label"></label>
+        <input asp-for="Fecha" class="form-control" />
+        <span asp-validation-for="Fecha" class="text-danger"></span>
+    </div>
+    <div class="col-md-6 mb-3">
+        <label asp-for="Lugar" class="form-label"></label>
+        <input asp-for="Lugar" class="form-control" />
+        <span asp-validation-for="Lugar" class="text-danger"></span>
+    </div>
+</div>
+<div class="row">
+    <div class="col-6 mb-3">
+        <label asp-for="Aforo" class="form-label"></label>
+        <input asp-for="Aforo" class="form-control" min="1" max="5000" />
+        <span asp-validation-for="Aforo" class="text-danger"></span>
+    </div>
+    <div class="col-6 mb-3">
+        <label asp-for="Precio" class="form-label">Precio (S/)</label>
+        <input asp-for="Precio" class="form-control" min="0" step="0.01" />
+        <span asp-validation-for="Precio" class="text-danger"></span>
+    </div>
+</div>
